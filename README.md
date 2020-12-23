@@ -17,5 +17,6 @@ Deployed at: _https://diabetespredictionkaggle.herokuapp.com/_
 _**----- ScreenShots -----**_<br />
 
 
-![Screenshots](diabetes screenshot1.png,diabetes screenshot2.png)
+![Screenshots](diabetes screenshot1.png)
 
+![Screenshots](diabetesscreenshot2.png)
