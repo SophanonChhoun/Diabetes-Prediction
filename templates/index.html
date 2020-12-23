@@ -1,0 +1,33 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Diabetes Prediction</title>
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+ <div class="login">
+	<h1>Diabetes Predictor</h1>
+
+    <form action="/predict"method="post">
+    	<input  type="text" name="Pregnancies" placeholder="No of Pregnancies eg:0" required="required" />
+        <input type="text" name="Glucose" placeholder="Glucose(mg/dL)" required="required" />
+		<input type="text" name="BloodPressure" placeholder="BloodPressure (mmHg) eg:75" required="required" />
+		<input type="text" name="SkinThickness" placeholder="Skin Thickness(mm) eg:20" required="required" />
+		<input type="text" name="Insulin" placeholder="Insulin Level (IU/mL) eg:79" required="required" />
+		<input type="text" name="BMI" placeholder="Body Mass Index (kg/m2) eg:19.5" required="required" />
+		<input type="text" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function eg:0.6" required="required" />
+		<input type="text" name="Age" placeholder="Age(years)" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+   <br>
+   <br>
+ </div>
+
+</body></html>
