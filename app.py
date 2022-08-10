@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
+import json
 
 # import sklearn
 
@@ -15,31 +16,36 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/predict', methods=['POST'])
+@app.route('/api/predict', methods=['POST'])
 def predict():
-    if request.method == 'POST':
-        preg = float(request.form['Pregnancies'])
-        glucose = float(request.form['Glucose'])
-        bp = float(request.form['BloodPressure'])
-        st = float(request.form['SkinThickness'])
-        insulin = float(request.form['Insulin'])
-        bmi = float(request.form['BMI'])
-        dpf = float(request.form['DiabetesPedigreeFunction'])
-        age = float(request.form['Age'])
+    data = request.json
+    preg = float(data['Pregnancies'])
+    glucose = float(data['Glucose'])
+    bp = float(data['BloodPressure'])
+    st = float(data['SkinThickness'])
+    insulin = float(data['Insulin'])
+    bmi = float(data['BMI'])
+    dpf = float(data['DiabetesPedigreeFunction'])
+    age = float(data['Age'])
+    data = np.array([[preg, glucose, bp, st, insulin, bmi, dpf, age]])
+    my_prediction = classifier.predict(data)
 
-        # int_features = [int(x) for x in request.form.values()]
+    if my_prediction == 1:
+        result = "Great! You DON'T have diabetes."
+    if my_prediction == 0:
+        result = "Oops! You Have Diabetes"
 
-        # final_features = [np.array(int_features)]
-
-        data = np.array([[preg, glucose, bp, st, insulin, bmi, dpf, age]])
-        my_prediction = classifier.predict(data)
-
-        if my_prediction == 1:
-            result = "Great! You DON'T have diabetes."
-        if my_prediction == 0:
-            result = "Oops! You Have Diabetes"
-
-        return render_template('results.html', Prediction=my_prediction)
+    return app.response_class(
+        response=json.dumps({
+            "message": result,
+            "precaution": [],
+            "has_diabetes": False,
+            'has_heart_disease': False,
+            "has_tuberculosis": False
+        }),
+        status=200,
+        mimetype='application/json'
+    )
 
 
 if __name__ == '__main__':
